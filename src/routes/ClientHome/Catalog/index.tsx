@@ -1,17 +1,14 @@
-import HeaderClient from '../../components/HeaderClient';
-import SearchBar from '../../components/SearchBar';
-import CatalogCard from '../../components/CatalogCard';
-import ButtonNextPage from '../../components/ButtonNextPage';
-
+import SearchBar from '../../../components/SearchBar';
+import CatalogCard from '../../../components/CatalogCard';
+import ButtonNextPage from '../../../components/ButtonNextPage';
 import './styles.css';
 
-export default function Catalog(){
+export default function Catalog() {
 
-    return(
+  return (
 
-      <>
-      <HeaderClient />
-      <main>
+
+    <main>
       <section id="catalog-section" className="dsc-container">
         <SearchBar />
 
@@ -30,14 +27,14 @@ export default function Catalog(){
 
         </div>
 
-          <ButtonNextPage />
+        <ButtonNextPage text={'Carregar mais'} />
 
       </section>
     </main>
 
-      
-      </>
-    
-    );
+
+
+
+  );
 
 }
