@@ -1,21 +1,23 @@
+import { ProductDTO } from '../../models/product';
 import './styles.css';
-export default function CatalogCard() {
 
+type Props = {
+    product: ProductDTO;
+}
+
+export default function CatalogCard({ product }: Props) {
     return (
-
         <div className="dsc-card">
             <div className="dsc-catalog-card-top dsc-line-bottom">
-                <img src="https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg" alt="Smat Tv" />
+                <img src={product.imgUrl} alt={product.name} />
             </div>
             <div className="dsc-catalog-card-bottom">
-                <h3>R$ 5000,00</h3>
+                <h3>R$ {product.price.toFixed(2)}</h3>
                 <h4>
-                    Smart Tv
-                </h4>
+                    {product.name}
+               </h4>
             </div>
         </div>
-
     );
-
 
 }

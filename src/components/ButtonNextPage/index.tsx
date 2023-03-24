@@ -10,7 +10,7 @@ export default function ButtonNextPage({text}: Props) {
 return(
 
     <div className="dsc-btn-next-page">
-        {text}
+         {text}
     </div>
 );
 

@@ -1,40 +1,27 @@
 import SearchBar from '../../../components/SearchBar';
 import CatalogCard from '../../../components/CatalogCard';
 import ButtonNextPage from '../../../components/ButtonNextPage';
+import * as productService from '../../../services/product-service';
 import './styles.css';
 
 export default function Catalog() {
 
   return (
-
-
     <main>
       <section id="catalog-section" className="dsc-container">
         <SearchBar />
 
         <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-          <CatalogCard />
-
+        {
+          productService.findAll().map(
+            product => <CatalogCard key={product.id} product={product} /> )
+        }
         </div>
 
         <ButtonNextPage text={'Carregar mais'} />
 
       </section>
     </main>
-
-
-
-
   );
 
 }
