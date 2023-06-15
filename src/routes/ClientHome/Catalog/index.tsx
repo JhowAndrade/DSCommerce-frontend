@@ -6,25 +6,39 @@ import * as productService from '../../../services/product-service';
 import { useEffect, useState } from 'react';
 import { ProductDTO } from '../../../models/product';
 
+type QueryParams = {
+  page: number;
+  name: string;
+}
+
 export default function Catalog() {
+
+  const [isLastPage, setIsLastPage] = useState(false);
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
-  const [productName, setProductName] = useState("");
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    page: 0,
+    name: ""
+  });
 
   useEffect(() => {
-    productService.findPageRequest(0, productName)
+    productService.findPageRequest(queryParams.page, queryParams.name)
       .then(response => {
-        setProducts(response.data.content);
+        const nextPage = response.data.content;
+        setProducts(products.concat(nextPage));
+        setIsLastPage(response.data.last);
       })
-
-  }, [productName]);
+  }, [queryParams]);
 
   function handleSearch(seartchText: string) {
-    setProductName(seartchText)
-    
+    setProducts([]);
+    setQueryParams({ ...queryParams, page: 0, name: seartchText });
   }
 
+  function handleNextPageClick() {
+    setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+  }
   return (
     <main>
       <section id="catalog-section" className="dsc-container">
@@ -37,8 +51,12 @@ export default function Catalog() {
           }
         </div>
 
-        <ButtonNextPage text={'Carregar mais'} />
-
+        {
+          !isLastPage &&
+          <div onClick={handleNextPageClick}>
+            <ButtonNextPage text={'Carregar mais'} />
+          </div>
+        }
       </section>
     </main>
   );
