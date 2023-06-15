@@ -1,6 +1,7 @@
+import './styles.css';
 import { Link } from 'react-router-dom';
 import { ProductDTO } from '../../models/product';
-import './styles.css';
+
 
 type Props = {
     product: ProductDTO;
