@@ -22,6 +22,7 @@ export default function ProductDetails() {
   useEffect(() => {
     productService.findById(Number(params.productId))
       .then(response => {
+        console.log(response.data);
         setProduct(response.data);
       })
       .catch(() => { navigate("/") });

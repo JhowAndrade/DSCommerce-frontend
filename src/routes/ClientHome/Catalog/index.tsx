@@ -10,24 +10,31 @@ export default function Catalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
-  useEffect(() => {
-    productService.findAll()
-    .then(response => {
-     setProducts(response.data.content);
-    })
+  const [productName, setProductName] = useState("");
 
-  },[]);
+  useEffect(() => {
+    productService.findPageRequest(0, productName)
+      .then(response => {
+        setProducts(response.data.content);
+      })
+
+  }, [productName]);
+
+  function handleSearch(seartchText: string) {
+    setProductName(seartchText)
+    
+  }
 
   return (
     <main>
       <section id="catalog-section" className="dsc-container">
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
 
         <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
-        {
-          products.map(
-            product => <CatalogCard key={product.id} product={product} /> )
-        }
+          {
+            products.map(
+              product => <CatalogCard key={product.id} product={product} />)
+          }
         </div>
 
         <ButtonNextPage text={'Carregar mais'} />
