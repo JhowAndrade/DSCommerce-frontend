@@ -1,7 +1,7 @@
 import QueryString from "qs";
 import { CLIENT_ID, CLIENT_SECTRET } from "../utils/system";
 import { AxiosRequestConfig } from "axios";
-import { AccessTokenPayloadDTO, CredentialsDTO } from "../models/auth";
+import { AccessTokenPayloadDTO, CredentialsDTO, RoleEnum } from "../models/auth";
 import { requestBackend } from "../utils/request";
 import * as accessTokenRepository from '../localstorage/access-token-repository';
 import jwtDecode from "jwt-decode";
@@ -54,3 +54,20 @@ export function isAuthenticated(): boolean {
     }
     return false;
 }
+
+
+export function hasAnyRoles(roles: RoleEnum[]): boolean {
+    if (roles.length === 0) {
+    return true;
+    }
+    const tokenPayload = getAccessTokenPayload();
+    if (tokenPayload !== undefined) {
+    for (var i = 0; i < roles.length; i++) {
+    if (tokenPayload.authorities.includes(roles[i])) {
+    return true;
+    }
+    }
+    //return roles.some(role => tokenData.authorities.includes(role));
+    }
+    return false;
+    }

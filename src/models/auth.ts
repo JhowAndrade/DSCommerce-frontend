@@ -6,6 +6,7 @@ export type CredentialsDTO = {
 };
 
 export type AccessTokenPayloadDTO = {
+    authorities: any;
     exp: number,
     user_name: string,
     auhorities: RoleEnum[]
