@@ -39,6 +39,7 @@ export default function Catalog() {
   function handleNextPageClick() {
     setQueryParams({ ...queryParams, page: queryParams.page + 1 });
   }
+
   return (
     <main>
       <section id="catalog-section" className="dsc-container">
@@ -53,9 +54,7 @@ export default function Catalog() {
 
         {
           !isLastPage &&
-          <div onClick={handleNextPageClick}>
-            <ButtonNextPage text={'Carregar mais'} />
-          </div>
+            <ButtonNextPage onNextPage={handleNextPageClick}/>
         }
       </section>
     </main>

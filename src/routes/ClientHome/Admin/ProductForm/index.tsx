@@ -1,4 +1,4 @@
-import './syles.css';
+import './styles.css';
 
 export default function ProductForm() {
 
