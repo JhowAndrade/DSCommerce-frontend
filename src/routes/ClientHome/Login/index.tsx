@@ -32,11 +32,11 @@ export default function Login() {
             type: "password",
             placeholder: "Senha",
         }
-    })
+    });
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        authService.loginRequest(formData)
+        authService.loginRequest(forms.toValues(formData))
             .then(response => {
                 authService.saveAccessToken(response.data.access_token);
                 setContextTokenPayload(authService.getAccessTokenPayload());
@@ -60,23 +60,13 @@ export default function Login() {
                         <h2>Login</h2>
                         <div className="dsc-form-controls-container">
                             <div>
-                                <FormInput
-                                {...formData.username}
-                                    className="dsc-form-control"
-                                    onChange={handleInputChange}
-                                />
+                                <FormInput {...formData.username} className="dsc-form-control" onChange={handleInputChange} />
                                 <div className="dsc-form-error"></div>
                             </div>
                             <div>
-                                <FormInput
-                                {...formData.password}
-                                    className="dsc-form-control"
-                                    onChange={handleInputChange}
-                                />
-
+                                <FormInput { ...formData.password} className="dsc-form-control" onChange={handleInputChange} />
                             </div>
                         </div>
-
                         <div className="dsc-login-form-buttons dsc-mt20">
                             <button type="submit" className="dsc-btn dsc-btn-blue">Entrar</button>
                         </div>
