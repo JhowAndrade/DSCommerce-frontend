@@ -26,7 +26,7 @@ export default function ProductForm() {
             name: "price",
             type: "number",
             placeholder: "Preço",
-            validaion: function(value: any) {
+            validaion: function (value: any) {
                 return Number(value) > 0;
             },
             message: "Favor informa um valor positivo"
@@ -53,13 +53,11 @@ export default function ProductForm() {
     }, []);
 
     function handleInputChange(event: any) {
-        const dataUdate = forms.update(formData, event.target.name, event.target.valeu);
-        const dataValidated = forms.validate(dataUdate, event.target.name);
-        setFormData(dataValidated);
+        setFormData(forms.updateAndValidate(formData, event.target.name, event.target.valeu));
     }
 
     function handleTurnDirty(name: string) {
-        const newFormData = forms.toDirty(formData, name);
+        setFormData(forms.dirtyAndValidate(formData, name));
     }
 
     return (
@@ -70,11 +68,21 @@ export default function ProductForm() {
                         <h2>Dados do produto</h2>
                         <div className="dsc-form-controls-container">
                             <div>
-                                <FormInput {...formData.name} className="dsc-form-control" onTurnDirty={handleTurnDirty} onChange={handleInputChange} />
+                                <FormInput
+                                    {...formData.name}
+                                    className="dsc-form-control"
+                                    onTurnDirty={handleTurnDirty}
+                                    onChange={handleInputChange}
+                                />
                                 <div className="dsc-form-error">{formData.name.message}</div>
                             </div>
                             <div>
-                                <FormInput {...formData.price} className="dsc-form-control" onTurnDirty={handleTurnDirty} onChange={handleInputChange} />
+                                <FormInput
+                                    {...formData.price}
+                                    className="dsc-form-control"
+                                    onTurnDirty={handleTurnDirty}
+                                    onChange={handleInputChange}
+                                />
                                 <div className="dsc-form-error">{formData.price.message}</div>
                             </div>
                             <div>
