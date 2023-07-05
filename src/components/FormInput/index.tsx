@@ -9,7 +9,7 @@ export default function FormInput(props: any) {
     return (
         <input { ...inputProps} 
         onBlur={handleBlur}
-        data-onInvalid={invalid}
+        data-invalid={invalid}
         data-dirty={dirty} />
     );
 };
