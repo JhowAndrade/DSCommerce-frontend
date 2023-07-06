@@ -1,3 +1,5 @@
+import { NewLifecycle } from "react";
+
 export function update(inputs: any, name: string, newValue: any) {
     return { ...inputs, [name]: { ...inputs[name], value: newValue } }
 }
@@ -77,4 +79,14 @@ export function hasAnyInvalid(inputs: any) {
         }
     }
    return false;
+}
+
+export function setBackendErrors(inputs: any, errors: any[]) {
+    const newInputs = { ...inputs};
+    errors.forEach(item => {
+        newInputs[item.fieldName].message = item.message;
+        newInputs[item.fieldName].dirty = "true";
+        newInputs[item.fieldName].invalid = "true";
+    });
+    return newInputs;
 }
