@@ -30,7 +30,6 @@ export default function HeaderAdmin() {
           </div>
         </nav>
       </header>
-
     );
 
 }

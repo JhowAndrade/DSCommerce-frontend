@@ -12,7 +12,7 @@ export default function ProductDetailsCard({ product }: Props) {
     return (
         <div className="dsc-card dsc-mb20">
             <div className="dsc-product-details-top dsc-line-bottom">
-                <img src={product.imgUrl} alt="{product.name}" />
+                <img src={product.imgUrl} alt={product.name} />
             </div>
             <div className="dsc-product-details-bottom">
                 <h3>R$ {product.price.toFixed(2)}</h3>

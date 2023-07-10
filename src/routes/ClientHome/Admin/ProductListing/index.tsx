@@ -38,7 +38,7 @@ export default function ProductListing() {
 
     const [queryParams, setQueryParams] = useState<QueryParams>({
         page: 0,
-        name: ""
+        name: "",
     });
 
     useEffect(() => {
@@ -126,7 +126,7 @@ export default function ProductListing() {
                             products.map(product => (
                                 <tr key={product.id}>
                                     <td className="dsc-tb576">{product.id}</td>
-                                    <td><img className="dsc-product-listing-image" src={product.imgUrl} alt="Computer" /></td>
+                                    <td><img className="dsc-product-listing-image" src={product.imgUrl} alt={product.name} /></td>
                                     <td className="dsc-tb768">{product.price.toFixed(2)}</td>
                                     <td className="dsc-txt-left">{product.name}</td>
                                     <td><img onClick={() => handleUpdateClick(product.id)} className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>

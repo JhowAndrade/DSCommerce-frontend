@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './Styles.css';
 
 type Props = {
-    onSearch: Function
+    onSearch: Function;
 }
 
 export default function SearchBar({ onSearch }: Props) {

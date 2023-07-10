@@ -19,6 +19,5 @@ export function placeOrderRequest (cart: OrderDTO) {
         withCredentials: true,
         data: cart
     }
-
     return requestBackend(config);
 }

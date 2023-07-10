@@ -17,7 +17,7 @@ export function findPageRequest(page: number, name: string, size = 12, sort = "n
 }
 
 export function findById(id: number) {
-    return requestBackend({url: `/products/{id}`});
+    return requestBackend({url: `/products/${id}`});
 }
 
 export function deleteById(id: number) {
