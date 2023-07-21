@@ -1,17 +1,16 @@
-import './styles.css';
+import "./styles.css";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
-import ProductDetailsCard from "../../../components/ProductDetailsCard";
+import PorductDetailsCard from "../../../components/ProductDetailsCard";
+import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { ProductDTO } from "../../../models/product";
 import * as productService from "../../../services/product-service";
-import * as carttService from "../../../services/cart-service";
-import { useNavigate, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
-import { ProductDTO } from '../../../models/product';
-import { ContextCartCount } from '../../../utils/context-cart';
+import * as cartService from "../../../services/cart-service";
+import { ContextCartCount } from "../../../utils/context-cart";
 
 export default function ProductDetails() {
-
   const params = useParams();
 
   const navigate = useNavigate();
@@ -21,18 +20,21 @@ export default function ProductDetails() {
   const [product, setProduct] = useState<ProductDTO>();
 
   useEffect(() => {
-    productService.findById(Number(params.productId))
-      .then(response => {
+    productService
+      .findById(Number(params.productId))
+      .then((response) => {
         console.log(response.data);
         setProduct(response.data);
       })
-      .catch(() => { navigate("/") });
+      .catch(() => {
+        navigate("/");
+      });
   }, []);
 
   function handleBuyClick() {
     if (product) {
-      carttService.addProduct(product);
-      setContextCartCount(carttService.getCart().items.length);
+      cartService.addProduct(product);
+      setContextCartCount(cartService.getCart().items.length);
       navigate("/cart");
     }
   }
@@ -40,20 +42,16 @@ export default function ProductDetails() {
   return (
     <main>
       <section id="product-details-section" className="dsc-container">
-        {
-          product &&
-          <ProductDetailsCard product={product} />
-        }
+        {product && <PorductDetailsCard product={product} />}
         <div className="dsc-btn-page-container">
           <div onClick={handleBuyClick}>
             <ButtonPrimary text="Comprar" />
           </div>
           <Link to="/">
-            <ButtonInverse text="Inicio" />
+            <ButtonInverse text="Início" />
           </Link>
         </div>
       </section>
     </main>
   );
-
 }

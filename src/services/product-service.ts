@@ -1,23 +1,25 @@
-import axios, { Axios, AxiosRequestConfig } from 'axios';
-import { requestBackend } from '../utils/request';
-import { ProductDTO } from '../models/product';
+import axios, { AxiosRequestConfig } from "axios";
+import { ProductDTO } from "../models/product";
+import { requestBackend } from "../utils/request";
+import { BASE_URL } from "../utils/system";
 
-export function findPageRequest(page: number, name: string, size = 12, sort = "name") {
+export function findPageRequest(page: number, name: string, size = 12, sort = "name" ) {
     const config : AxiosRequestConfig = {
         method: "GET",
-        url: " /products",
+        url: "/products",
         params: {
             page,
             name,
             size,
             sort
         }
-    }   
+    }
+
     return requestBackend(config);
 }
 
 export function findById(id: number) {
-    return requestBackend({url: `/products/${id}`});
+    return requestBackend({ url: `/products/${id}`})
 }
 
 export function deleteById(id: number) {
@@ -25,20 +27,21 @@ export function deleteById(id: number) {
         method: "DELETE",
         url: `/products/${id}`,
         withCredentials: true
-        }
-        return requestBackend(config);
+    }
+
+    return requestBackend(config);
 }
 
 export function updateRequest(obj: ProductDTO) {
     const config: AxiosRequestConfig = {
         method: "PUT",
-        url:`/products/${obj.id}`,
+        url: `/products/${obj.id}`,
         withCredentials: true,
         data: obj
     }
+
     return requestBackend(config);
 }
-
 
 export function insertRequest(obj: ProductDTO) {
     const config: AxiosRequestConfig = {
@@ -47,5 +50,6 @@ export function insertRequest(obj: ProductDTO) {
         withCredentials: true,
         data: obj
     }
+
     return requestBackend(config);
 }

@@ -1,15 +1,14 @@
-import { OrderDTO, OrderItemDTO } from "../models/order";
-import * as cartRepository from '../localstorage/cart-repository';
+import { OrderDTO, OrderItemDTO } from "../models/Order";
+import * as cartRepository from "../localstorage/cart-repository";
 import { ProductDTO } from "../models/product";
-
 
 export function saveCart(cart: OrderDTO) {
     cartRepository.save(cart);
 }
 
-export function getCart(): OrderDTO {
+export function getCart() : OrderDTO {
     return cartRepository.get();
-}
+} 
 
 export function addProduct(product: ProductDTO) {
     const cart = cartRepository.get();
@@ -25,17 +24,16 @@ export function clearCart() {
     cartRepository.clear();
 }
 
-export function increaseIem(productId: number) {
+export function increaseItem(productId: number) {
     const cart = cartRepository.get();
     const item = cart.items.find(x => x.productId === productId);
     if (item) {
         item.quantity++;
-        cartRepository.save(cart);
+        cartRepository.save(cart); 
     }
 }
 
-
-export function decreaseIem(productId: number) {
+export function decreaseItem(productId: number) {
     const cart = cartRepository.get();
     const item = cart.items.find(x => x.productId === productId);
     if (item) {
@@ -43,6 +41,6 @@ export function decreaseIem(productId: number) {
         if (item.quantity < 1) {
             cart.items = cart.items.filter(x => x.productId !== productId);
         }
-        cartRepository.save(cart);
+        cartRepository.save(cart); 
     }
 }
